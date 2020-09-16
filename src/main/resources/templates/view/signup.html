@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- header GET -->
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <h1 class="text-center p-3 m-5">Welcome Signup Page</h1>
+    <h3 class="text-center"><a href="/">GO TO HOME</a></h3>
+    <form action="SIGNUP" method="post" id="SIGNUP" class="p-2 m-2 text-center">
+        <input hidden id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="p-2 m-2">
+            <label for="username">ID</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+        <div class="p-2 m-2">
+            <label for="password">PASSWORD</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <div class="p-2 m-2">
+            <label for="password_check">PASSWORD CHECK</label>
+            <input type="password" name="password_check" id="password_check" required>
+        </div>
+        <div class="p-2 m-2">
+            <label for="name">NAME</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div class="p-2 m-2">
+            <label for="email">EMAIL</label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+
+    <!-- footer GET -->
+    <footer th:replace="fragment/footer::footer"></footer>
+
+    <!-- others -->
+    <script src="/js/signup.js"></script>
+</body>
+</html>

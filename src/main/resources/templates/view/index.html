@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- header GET -->
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <h1 class="text-center p-3 m-5">Welcome Home page</h1>
+    <div th:if="${data}" class="text-center">
+        <div th:text="${data.username}"></div>
+        <div th:text="${data.email}"></div>
+        <div th:text="${data.name}"></div>
+        <div th:text="${data.role}"></div>
+        <form action="/api/logout" method="post" id="LOGOUT">
+            <input hidden id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="submit" value="로그아웃"/>
+        </form>
+    </div>
+    <div th:unless="${data}" class="text-center">
+        <h3 class="p-2 m-2"><a href="/login">로그인</a></h3>
+        <h3 class="p-2 m-2"><a href="/signup">회원가입</a></h3>
+    </div>
+    
+
+    <!-- footer GET -->
+    <footer th:replace="fragment/footer::footer"></footer>
+</body>
+</html>
