@@ -6,6 +6,7 @@ import com.example.seller_tool_login.model.service.UserAuthService;
 import com.example.seller_tool_login.model.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,9 @@ public class RouterController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RedisTemplate redisTemplate;
     
     @GetMapping(value = "/")
     public String HomePage(HttpServletRequest request, Model model){
@@ -26,6 +30,7 @@ public class RouterController {
 
     @GetMapping(value = "/login")
     public String LoginPage(HttpServletRequest request){
+        System.out.println(request.getSession().getId());
         if(userAuthService.isUserSessionValid(request)){
             return "redirect:/";
         }

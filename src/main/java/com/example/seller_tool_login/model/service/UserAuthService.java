@@ -12,21 +12,16 @@ import com.example.seller_tool_login.model.DTO.UserLoginSessionDTO;
 import com.example.seller_tool_login.model.DTO.UserSignupDTO;
 import com.example.seller_tool_login.model.entity.UserEntity;
 import com.example.seller_tool_login.model.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 enum ROLE {
-    ROLE_ADMIN,
-    ROLE_USER,
-    ROLE_MANAGER,
-    ROLE_USERA,
-    ROLE_USERB,
-    ROLE_USERC,
-    ROLE_USERP
+    ROLE_ADMIN, ROLE_USER, ROLE_MANAGER, ROLE_USERA, ROLE_USERB, ROLE_USERC, ROLE_USERP
 }
 
 @Service
@@ -43,7 +38,7 @@ public class UserAuthService {
     @Autowired
     RedisTemplate redisTemplate;
 
-    public String insertUserOne(UserSignupDTO userSignupDto){
+    public String insertUserOne(UserSignupDTO userSignupDto) {
         UserEntity user = new UserEntity();
 
         // Create DB user identity UUID
@@ -55,7 +50,8 @@ public class UserAuthService {
         Date currentDate = currentCalendar.getTime();
 
         String salt = uuidSalt.toString();
-        // Encode password is String (input password string data of signup user + created password of salt UUID).
+        // Encode password is String (input password string data of signup user +
+        // created password of salt UUID).
         String encPassword = encoder.encode(userSignupDto.getPassword() + salt);
 
         user.setId(uuid.toString());
@@ -70,9 +66,9 @@ public class UserAuthService {
         user.setCredentialCreatedAt(currentDate);
         user.setCredentialExpireAt(currentDate);
 
-        if(userRepository.save(user).getId()!=null){
+        if (userRepository.save(user).getId() != null) {
             return "{\"message\":\"success\"}";
-        }else{
+        } else {
             return "{\"message\":\"failure\"}";
         }
     }
@@ -85,8 +81,8 @@ public class UserAuthService {
 
         String mergePassword = userLoginDto.getPassword() + user.getSalt();
         if(encoder.matches(mergePassword, user.getPassword())){
-            UserLoginSessionDTO sessionDateSet = setUserEntityToSessionDTO(user);
-            redisTemplate.opsForValue().set("spring:session:sessions:expires:"+request.getSession().getId(), sessionDateSet);
+            UserLoginSessionDTO sessionDataSet = setUserEntityToSessionDTO(user);
+            redisTemplate.opsForValue().set("spring:session:sessions:expires:"+request.getSession().getId(), sessionDataSet);
             return true;
         }
         return false;
@@ -103,6 +99,7 @@ public class UserAuthService {
 
     public Boolean isUserSessionValid(HttpServletRequest request){
         Object session = redisTemplate.opsForValue().get("spring:session:sessions:expires:" + request.getSession().getId());
+        
         if( session != null && session.getClass().getSimpleName().equals("UserLoginSessionDTO") ){
             UserLoginSessionDTO sessionData = (UserLoginSessionDTO) session;
             if(sessionData.getStatus().equals("loged")){
