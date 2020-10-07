@@ -2,29 +2,46 @@
 <html lang="ko">
 
 <!-- header GET -->
+
 <head th:replace="fragment/header::header"></head>
 
 <body>
-    <h1 class="text-center p-3 m-5">Welcome Login Page</h1>
-    <h3 class="text-center"><a href="/">GO TO HOME</a></h3>
-    <form action="LOGIN" method="post" id="LOGIN" class="p-2 m-2 text-center">
-        <input hidden id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <div class="p-2 m-2">
-            <label for="username">ID</label>
-            <input type="text" name="username" id="username"> <br>
+    
+    <header class="st_header">
+        <h2 class="text-center p-3 m-3">셀러툴 로그인</h2>
+        <h4 class="text-center"><a href="/">GO TO HOME</a></h4>
+    </header>
+    <div class="container">
+        <div class="st_form_box">
+            <form action="LOGIN" method="post" id="LOGIN" class="clearfix">
+                <input hidden id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="p-2 m-2 form-group">
+                    <label for="username">유저 아이디</label>
+                    <input type="text" class="form-control" name="username" id="username" required>
+                    <small id="usernameHelp" class="form-text text-muted">유저 아이디를 입력해 주세요.</small>
+                </div>
+                <div class="p-2 m-2">
+                    <label for="username">패스워드</label>
+                    <input type="password"  class="form-control" name="password" id="password" required>
+                    <small id="passwordHelp" class="form-text text-muted">유저 패스워드를 입력해 주세요.</small>
+                </div>
+                <div class="p-2 m-2 clearfix">
+                    <button type="submit" class="btn btn-lg btn-primary float-right">로그인</button>
+                </div>
+            </form>
+            <div class="text-center p-2 m-2">
+                회원이 아니십니까? <a href="/signup">회원가입</a>
+            </div>
+            <div class="text-center p-2 m-2">
+                아이디, 비밀번호가 기억이 안나시나요? <a href="/find/id">아이디 찾기</a>, <a href="/find/pw">비밀번호 찾기</a>
+            </div>
         </div>
-        <div class="p-2 m-2">
-            <label for="username">PW</label>
-            <input type="password" name="password" id="password"> <br>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    <div class="text-center">
-        회원이 아니십니까? <a href="/signup">회원가입</a>
+        
     </div>
 
     <!-- footer GET -->
     <footer th:replace="fragment/footer::footer"></footer>
-    <script src="/js/login.js"></script>
+    <script th:src="@{/js/login.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
+
 </html>

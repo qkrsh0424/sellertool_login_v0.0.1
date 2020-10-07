@@ -4,37 +4,54 @@
 <head th:replace="fragment/header::header"></head>
 
 <body>
-    <h1 class="text-center p-3 m-5">Welcome Signup Page</h1>
-    <h3 class="text-center"><a href="/">GO TO HOME</a></h3>
-    <form action="SIGNUP" method="post" id="SIGNUP" class="p-2 m-2 text-center">
-        <input hidden id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <div class="p-2 m-2">
-            <label for="username">ID</label>
-            <input type="text" name="username" id="username" required>
+    <header class="st_header">
+        <h2 class="text-center p-3 m-3">셀러툴 회원가입</h2>
+        <h4 class="text-center"><a href="/">GO TO HOME</a></h4>
+    </header>
+    <div class="container">
+        <div class="st_form_box">
+            <form action="SIGNUP" method="post" id="SIGNUP">
+                <input hidden id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="p-2 m-2 form-group">
+                    <label for="username">유저 아이디</label>
+                    <input type="text" class="form-control" name="username" id="username" required>
+                    <small id="usernameHelp" class="form-text text-muted">"아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다."</small>
+                </div>
+                <div class="p-2 m-2 form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
+                    <small id="passwordHelp" class="form-text text-muted">"비밀번호는 8자리 ~ 20자리 이내로 공백없이 영문, 숫자, 특수문자를 혼합하여 입력해주세요."</small>
+                </div>
+                <div class="p-2 m-2 form-group">
+                    <label for="password_check">비밀번호 확인</label>
+                    <input type="password" class="form-control" name="password_check" id="password_check" required>
+                </div>
+                <div class="p-2 m-2 form-group">
+                    <label for="name">이름 또는 사업자명</label>
+                    <input type="text" class="form-control" name="name" id="name" required>
+                </div>
+                <div class="p-2 m-2 form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" class="form-control" name="email" id="email" required>
+                    <small id="passwordHelp" class="form-text text-muted">"중복 이메일은 허용하지 않으며, 이후 아이디 및 비밀번호 찾기에 이용됩니다."</small>
+                    <button type="button" onclick="valifyEmailSend()" class="btn btn-primary p-2 mt-2" id="valifyEmailBtn">메일 인증 보내기</button>
+                </div>
+                <div class="p-2 m-2 form-group" id="valifyEmailBox"></div>
+                <div class="p-2 m-2 clearfix">
+                    <button type="submit" class="btn btn-lg btn-primary float-right" id="signupSubmitBtn" disabled>회원가입</button>
+                </div>
+            </form>
+            <div class="text-center p-2 m-2">
+                이미 회원이십니까? <a href="/login">로그인</a>
+            </div>
         </div>
-        <div class="p-2 m-2">
-            <label for="password">PASSWORD</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <div class="p-2 m-2">
-            <label for="password_check">PASSWORD CHECK</label>
-            <input type="password" name="password_check" id="password_check" required>
-        </div>
-        <div class="p-2 m-2">
-            <label for="name">NAME</label>
-            <input type="text" name="name" id="name" required>
-        </div>
-        <div class="p-2 m-2">
-            <label for="email">EMAIL</label>
-            <input type="email" name="email" id="email" required>
-        </div>
-        <button type="submit" class="btn btn-primary">회원가입</button>
-    </form>
+    </div>
+    
 
     <!-- footer GET -->
     <footer th:replace="fragment/footer::footer"></footer>
 
     <!-- others -->
-    <script src="/js/signup.js"></script>
+    <script th:src="@{/js/signup.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 </html>

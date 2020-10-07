@@ -1,5 +1,6 @@
 $("#LOGIN").submit(function (event) {
     event.preventDefault();
+
     if (usernameCheck() === false) {
         return;
     }
@@ -19,7 +20,6 @@ $("#LOGIN").submit(function (event) {
             xhr.setRequestHeader("X-CSRF-Token", $("#_csrf").val());
         },
         success: function (data) {
-            console.log(data);
             if (data.message === "success") {
                 window.location.href="/";
             } else if(data.message === "failure"){

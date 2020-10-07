@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- header GET -->
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    
+    <header class="st_header">
+        <h2 class="text-center p-3 m-3">셀러툴 아이디 찾기</h2>
+        <h4 class="text-center"><a href="/">GO TO HOME</a></h4>
+    </header>
+    <div class="container">
+        <div class="st_form_box">
+            <form action="FINDID" method="post" id="FINDID" class="clearfix">
+                <input hidden id="_csrf_FINDID" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="p-2 m-2 form-group">
+                    <label for="email_find_id">등록된 이메일</label>
+                    <input type="email" class="form-control" name="email_find_id" id="email_find_id" required>
+                    <small id="email_find_idHelp" class="form-text text-muted">가입시 등록한 이메일을 입력해 주세요.</small>
+                </div>
+                <div class="p-2 m-2 clearfix">
+                    <button type="submit" class="btn btn-lg btn-primary float-right">메일 받기</button>
+                </div>
+            </form>
+            <div class="text-center p-2 m-2">
+                비밀번호가 기억이 나지않습니까? <a href="/find/pw">비밀번호 찾기</a>
+            </div>
+            <div class="text-center p-2 m-2">
+                <a href="/login">로그인 하러가기</a>
+            </div>
+            <div class="text-center p-2 m-2">
+                회원이 아니십니까? <a href="/signup">회원가입</a>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- footer GET -->
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script th:src="@{/js/find.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- header GET -->
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    
+    <header class="st_header">
+        <h2 class="text-center p-3 m-3">셀러툴</h2>
+        <h4 class="text-center">메일을 성공적으로 발송했습니다.</h4>
+        <h4 class="text-center"><a href="/">GO TO HOME</a></h4>
+    </header>
+    <div class="container">
+        <div class="st_form_box">
+            <div class="text-center m-2">
+                <p style="font-weight:700">메일을 받지 못하셨나요 ?</p>
+                <p style="font-size:14px; color:red;">메일 서비스의 스팸함을 확인해주세요. gmail의 경우 프로모션 탭을 확인해 주세요.</p>
+            </div>
+            <div class="text-center p-2 m-2">
+                로그인 하러가기 <a href="/login"> 로그인 </a>
+            </div>
+            <div class="text-center p-2 m-2">
+                회원이 아니십니까? <a href="/signup"> 회원가입 </a>
+            </div>
+            <div class="text-center p-2 m-2">
+                아이디, 비밀번호가 기억이 안나시나요? <a href="/find/id"> 아이디 찾기 </a>, <a href="/find/pw"> 비밀번호 찾기 </a>
+            </div>
+            <div class="text-center p-2 m-2">
+                더 나은 서비스를 원하시면 pcysynabro.ads@gmail.com 로 자세한 내용을 작성하여 문의 주시면 빠르게 도와드리도록 하겠습니다.
+            </div>
+        </div>
+    </div>
+
+    <!-- footer GET -->
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script th:src="@{/js/login.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+</body>
+
+</html>

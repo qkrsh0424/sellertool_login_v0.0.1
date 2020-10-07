@@ -31,6 +31,9 @@ $("#SIGNUP").submit(function (event) {
             } else if (data.message === "exist") {
                 alert("이미 존재하는 유저 아이디입니다.");
                 $("#username").focus();
+            } else if(data.message==="accessDenied"){
+                alert("옳바른 접근 방법을 사용하세요.");
+                window.location.reload();
             } else {
                 alert("service error")
             }
@@ -76,4 +79,86 @@ function chkPW(password, checkPassword) {
         return true;
     }
 
+}
+
+function valifyEmailSend(){
+    // $("#valifyEmailBox").css("display","block");
+    let data = {
+        "email":$("#email").val()
+    }
+    emailAuthHtmlView(true);
+    $.ajax({
+        url:"/api/sendmail",
+        type:"GET",
+        contentType:"application/json",
+        dataType:"json",
+        data:data,
+        success:function(returnData){
+            if(returnData.message==="exist"){
+                emailAuthHtmlView(false);
+                return alert("이미 등록된 이메일 입니다.");
+            }else if(returnData.message==="success"){
+                return;
+            }else{
+                emailAuthHtmlView(false);
+                alert("예상치 못한 에러가 발생했습니다. 다시 시도해 주세요.");
+                return window.location.reload();
+            }
+            
+        },
+        error:function(error){
+            console.log(error);
+            alert("mail service error");
+        }
+    })
+}
+
+function emailAuthHtmlView(bool){
+    if(bool===true){
+        $("#valifyEmailBtn").attr("disabled",true);
+        $("#valifyEmailBox").html(
+            `
+                <label for="emailCode">인증 코드</label>
+                <input class="form-control" type="text" name="emailCode" id="emailCode" value="">
+                <small id="passwordHelp" class="form-text text-muted">"인증 메일의 코드를 입력해 주세요."</small>
+                <button type="button" class="btn btn-success p-2 mt-2" onclick="emailCodeCheckHandler()">확인</button>
+                <div class="text-center m-2">
+                    <p>인증 메일을 ${$("#email").val()} 로 전송했습니다.</p>
+                    <p style="font-weight:700">인증 메일을 받지 못하셨나요 ?</p>
+                    <p style="font-size:12px; color:red;">메일 서비스의 스팸함을 확인해주세요. gmail의 경우 프로모션 탭을 확인해 주세요.</p>
+                </div>
+            `
+        );
+    }else{
+        $("#valifyEmailBtn").attr("disabled",false);
+        $("#valifyEmailBox").html('');
+    }
+    
+}
+
+function emailCodeCheckHandler(){
+    let data = {
+        "emailCode":$("#emailCode").val()
+    }
+
+    $.ajax({
+        url:"/api/email/checkcode",
+        type:"GET",
+        contentType:"application/json",
+        dataType:"json",
+        data:data,
+        success:function(returnData){
+            if(returnData.message==="success"){
+                $("#valifyEmailBox").css("display","none");
+                $("#email").attr("disabled",true)
+                $("#signupSubmitBtn").attr("disabled",false);
+            }else{
+                alert("인증 코드가 일치하지 않습니다.");
+            }
+        },
+        error:function(error){
+            console.log(error);
+            alert("mail service error");
+        }
+    })
 }
