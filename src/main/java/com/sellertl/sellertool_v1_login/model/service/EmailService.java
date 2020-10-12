@@ -195,23 +195,51 @@ public class EmailService {
         String title = "셀러툴 회원가입 인증 메일 입니다.";
         String sendAddress = "sellertool@sellertl.com";
         StringBuilder content = new StringBuilder();
+        // content.append(
+        //                 "<!DOCTYPE html>"+
+        //                 "<html lang=\"ko\">"+
+        //                 "<head>"+
+        //                     "<meta charset=\"UTF-8\">"+
+        //                     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"+
+        //                 "</head>"+
+        //                 "<body>"+
+        //                     "<div style=\"text-align:center;\">"+
+        //                         "<h1>안녕하세요 셀러툴 입니다. 셀러툴을 이용해 주셔서 감사합니다.</h1>"+
+        //                         "<h1>회원가입 인증 코드는 </h3>"+
+        //                         "<h1 style=\"color:red;\"><strong>"+code+"</strong></h1>"+
+        //                         "<h1>입니다.</h1>"+
+        //                     "</div>"+
+        //                 "</body>"+
+        //                 "</html>"
+        //             );
         content.append(
-                        "<!DOCTYPE html>"+
-                        "<html lang=\"ko\">"+
-                        "<head>"+
-                            "<meta charset=\"UTF-8\">"+
-                            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"+
-                        "</head>"+
-                        "<body>"+
-                            "<div style=\"text-align:center;\">"+
-                                "<h1>안녕하세요 셀러툴 입니다. 셀러툴을 이용해 주셔서 감사합니다.</h1>"+
-                                "<h1>회원가입 인증 코드는 </h3>"+
-                                "<h1 style=\"color:red;\"><strong>"+code+"</strong></h1>"+
-                                "<h1>입니다.</h1>"+
+            "<!DOCTYPE html>"+
+            "<html lang=\"ko\">"+
+                "<head>"+
+                    "<link href=\"https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap\" rel=\"stylesheet\">"+
+                    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />"+
+                "</head>"+
+                "<body style=\"background-color: white;\">"+
+                    "<main>"+
+                        "<div style=\"padding-top: 50px; background-color: white; font-family: 'Noto Sans KR', sans-serif; width: 70%; margin: auto;\">"+
+                            "<h1 class=\"mail_header\">Seller Tool</h1>"+
+                            "<div style=\"border: 9px solid #164773; padding: 20px 15px; text-align: center;\">"+
+                                "<p>안녕하세요, 판매자님</p>"+
+                                "<p>셀러툴의 가입을 완료하기 위해 아래의 인증번호를</p>"+
+                                "<p>인증번호 입력창에 입력해 주세요.</p>"+
+                                "<p style=\"text-align: center; font-size: 28px; font-weight: 600;\">"+code+"</p>"+
+                                "<div style=\"opacity: 0.6; font-size: 12px;\">"+
+                                    "<p>계정 보호를 위해 이 이메일을 전달하거나 다른 사람에게 공유하지 마세요.</p>"+
+                                "</div>"+
                             "</div>"+
-                        "</body>"+
-                        "</html>"
-                    );        
+                            "<div style=\"opacity: 0.4;\">"+
+                                "<p>@2020 SellerTool.</p>"+
+                            "</div>"+
+                        "</div>"+
+                    "</main>"+
+                "</body>"+
+            "</html>"
+        );
         EmailDTO email = new EmailDTO(title,content.toString(),sendAddress,receiveAddress);
         return email;
     }
@@ -220,23 +248,52 @@ public class EmailService {
         String title = "셀러툴 아이디 찾기 메일 입니다.";
         String sendAddress = "sellertool@sellertl.com";
         StringBuilder content = new StringBuilder();
+        // content.append(
+        //                 "<!DOCTYPE html>"+
+        //                 "<html lang=\"ko\">"+
+        //                 "<head>"+
+        //                     "<meta charset=\"UTF-8\">"+
+        //                     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"+
+        //                 "</head>"+
+        //                 "<body>"+
+        //                     "<div style=\"text-align:center;\">"+
+        //                         "<h1>안녕하세요 셀러툴 입니다. 셀러툴을 이용해 주셔서 감사합니다.</h1>"+
+        //                         "<h1>회원님의 아이디는 </h3>"+
+        //                         "<h1 style=\"color:red;\"><strong>"+username+"</strong></h1>"+
+        //                         "<h1>입니다.</h1>"+
+        //                     "</div>"+
+        //                 "</body>"+
+        //                 "</html>"
+        //             );        
         content.append(
-                        "<!DOCTYPE html>"+
-                        "<html lang=\"ko\">"+
-                        "<head>"+
-                            "<meta charset=\"UTF-8\">"+
-                            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"+
-                        "</head>"+
-                        "<body>"+
-                            "<div style=\"text-align:center;\">"+
-                                "<h1>안녕하세요 셀러툴 입니다. 셀러툴을 이용해 주셔서 감사합니다.</h1>"+
-                                "<h1>회원님의 아이디는 </h3>"+
-                                "<h1 style=\"color:red;\"><strong>"+username+"</strong></h1>"+
-                                "<h1>입니다.</h1>"+
+            "<!DOCTYPE html>"+
+            "<html lang=\"ko\">"+
+                "<head>"+
+                    "<link href=\"https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap\" rel=\"stylesheet\">"+
+                    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />"+
+                "</head>"+
+                "<body style=\"background-color: white;\">"+
+                    "<main>"+
+                        "<div style=\"padding-top: 50px; background-color: white; font-family: 'Noto Sans KR', sans-serif; width: 70%; margin: auto;\">"+
+                            "<h1 class=\"mail_header\">Seller Tool</h1>"+
+                            "<div style=\"border: 9px solid #164773; padding: 20px 15px; text-align: center;\">"+
+                                "<p>안녕하세요, 회원님</p>"+
+                                "<p>셀러툴을 이용해 주셔서 감사합니다.</p>"+
+                                "<p>회원님의 아이디는 </p>"+
+                                "<p style=\"text-align: center; font-size: 28px; font-weight: 600;\">"+username+"</p>"+
+                                "<p>입니다. </p>"+
+                                "<div style=\"opacity: 0.6; font-size: 12px;\">"+
+                                    "<p>계정 보호를 위해 이 이메일을 전달하거나 다른 사람에게 공유하지 마세요.</p>"+
+                                "</div>"+
                             "</div>"+
-                        "</body>"+
-                        "</html>"
-                    );        
+                            "<div style=\"opacity: 0.4;\">"+
+                                "<p>@2020 SellerTool.</p>"+
+                            "</div>"+
+                        "</div>"+
+                    "</main>"+
+                "</body>"+
+            "</html>"
+        );
         EmailDTO email = new EmailDTO(title,content.toString(),sendAddress,receiveAddress);
         return email;
     }
@@ -245,24 +302,53 @@ public class EmailService {
         String title = "셀러툴 비밀번호 찾기 메일 입니다.";
         String sendAddress = "sellertool@sellertl.com";
         StringBuilder content = new StringBuilder();
+        // content.append(
+        //                 "<!DOCTYPE html>"+
+        //                 "<html lang=\"ko\">"+
+        //                 "<head>"+
+        //                     "<meta charset=\"UTF-8\">"+
+        //                     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"+
+        //                 "</head>"+
+        //                 "<body>"+
+        //                     "<div style=\"text-align:center;\">"+
+        //                         "<h1>안녕하세요 셀러툴 입니다. 셀러툴을 이용해 주셔서 감사합니다.</h1>"+
+        //                         "<h1>회원님의 임시 비밀번호는 </h3>"+
+        //                         "<h1 style=\"color:red;\"><strong>"+newPassword+"</strong></h1>"+
+        //                         "<h1>입니다.</h1>"+
+        //                         "<h1>임시 비밀번호로 로그인을 하신다음 빠른 시일내로 새로운 비밀번호로 변경해 주시기 바랍니다.</h1>"+
+        //                     "</div>"+
+        //                 "</body>"+
+        //                 "</html>"
+        //             );        
         content.append(
-                        "<!DOCTYPE html>"+
-                        "<html lang=\"ko\">"+
-                        "<head>"+
-                            "<meta charset=\"UTF-8\">"+
-                            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"+
-                        "</head>"+
-                        "<body>"+
-                            "<div style=\"text-align:center;\">"+
-                                "<h1>안녕하세요 셀러툴 입니다. 셀러툴을 이용해 주셔서 감사합니다.</h1>"+
-                                "<h1>회원님의 임시 비밀번호는 </h3>"+
-                                "<h1 style=\"color:red;\"><strong>"+newPassword+"</strong></h1>"+
-                                "<h1>입니다.</h1>"+
-                                "<h1>임시 비밀번호로 로그인을 하신다음 빠른 시일내로 새로운 비밀번호로 변경해 주시기 바랍니다.</h1>"+
+            "<!DOCTYPE html>"+
+            "<html lang=\"ko\">"+
+                "<head>"+
+                    "<link href=\"https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap\" rel=\"stylesheet\">"+
+                    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />"+
+                "</head>"+
+                "<body style=\"background-color: white;\">"+
+                    "<main>"+
+                        "<div style=\"padding-top: 50px; background-color: white; font-family: 'Noto Sans KR', sans-serif; width: 70%; margin: auto;\">"+
+                            "<h1 class=\"mail_header\">Seller Tool</h1>"+
+                            "<div style=\"border: 9px solid #164773; padding: 20px 15px; text-align: center;\">"+
+                                "<p>안녕하세요, 회원님</p>"+
+                                "<p>셀러툴을 이용해 주셔서 감사합니다.</p>"+
+                                "<p>회원님의 임시 비밀번호는 </p>"+
+                                "<p style=\"text-align: center; font-size: 28px; font-weight: 600;\">"+newPassword+"</p>"+
+                                "<p>입니다. </p>"+
+                                "<div style=\"opacity: 0.6; font-size: 12px;\">"+
+                                    "<p>계정 보호를 위해 이 이메일을 전달하거나 다른 사람에게 공유하지 마세요.</p>"+
+                                "</div>"+
                             "</div>"+
-                        "</body>"+
-                        "</html>"
-                    );        
+                            "<div style=\"opacity: 0.4;\">"+
+                                "<p>@2020 SellerTool.</p>"+
+                            "</div>"+
+                        "</div>"+
+                    "</main>"+
+                "</body>"+
+            "</html>"
+        );
         EmailDTO email = new EmailDTO(title,content.toString(),sendAddress,receiveAddress);
         return email;
     }

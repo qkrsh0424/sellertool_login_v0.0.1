@@ -37,7 +37,6 @@ public class MailSendApiController {
     public String checkEmailCode(@RequestParam("emailCode") String code, HttpServletRequest request,HttpServletResponse response){
 
         boolean result = emailService.isCodeValid(code, request);
-
         if(result){
             return "{\"message\":\"success\"}";
         }else{
