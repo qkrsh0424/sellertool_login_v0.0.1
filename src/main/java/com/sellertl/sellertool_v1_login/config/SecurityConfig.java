@@ -16,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+import org.springframework.session.web.http.CookieSerializer;
+import org.springframework.session.web.http.DefaultCookieSerializer;
 
 @Configuration
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60*60)
@@ -77,12 +79,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     //     return redisTemplate;
     // }
 
-    // @Bean
-    // public CookieSerializer cookieSerializer(){
-    //     DefaultCookieSerializer serializer = new DefaultCookieSerializer();
-    //     serializer.setCookieName("STUSEID");
-    //     serializer.setCookiePath("/");
-    //     serializer.setDomainNamePattern("^.+?\\.(\\w+\\.[a-z]+)$");
-    //     return serializer;
-    // }
+    @Bean
+    public CookieSerializer cookieSerializer(){
+        DefaultCookieSerializer serializer = new DefaultCookieSerializer();
+        serializer.setCookieName("STUSEID");
+        serializer.setCookiePath("/");
+        serializer.setDomainNamePattern("^.+?\\.(\\w+\\.[a-z]+)$");
+        return serializer;
+    }
 }
