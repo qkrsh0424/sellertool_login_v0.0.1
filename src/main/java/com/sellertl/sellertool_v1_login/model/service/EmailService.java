@@ -1,6 +1,7 @@
 package com.sellertl.sellertool_v1_login.model.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,7 @@ import com.sellertl.sellertool_v1_login.model.DTO.EmailDTO;
 import com.sellertl.sellertool_v1_login.model.DTO.SignupCodeDTO;
 import com.sellertl.sellertool_v1_login.model.entity.UserEntity;
 import com.sellertl.sellertool_v1_login.model.repository.UserRepository;
+import com.sellertl.sellertool_v1_login.model.type.DeletedType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -395,8 +397,16 @@ public class EmailService {
     }
     
     public Boolean existUserEmail(String email){
-        UserEntity user = userRepository.findByEmail(email);
-        if(user != null){
+        // **OLD TEST_TODO V1
+        // UserEntity user = userRepository.findByEmail(email);
+        // if(user != null){
+        //     return true;
+        // }
+        // return false;
+
+        // **NEW
+        Optional<UserEntity> user = userRepository.findByEmail_Custom(email,DeletedType.EXIST);
+        if(user.isPresent()){
             return true;
         }
         return false;

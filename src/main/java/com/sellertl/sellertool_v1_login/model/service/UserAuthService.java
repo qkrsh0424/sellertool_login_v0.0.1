@@ -3,6 +3,7 @@ package com.sellertl.sellertool_v1_login.model.service;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import com.sellertl.sellertool_v1_login.model.DTO.UserLoginSessionDTO;
 import com.sellertl.sellertool_v1_login.model.DTO.UserSignupDTO;
 import com.sellertl.sellertool_v1_login.model.entity.UserEntity;
 import com.sellertl.sellertool_v1_login.model.repository.UserRepository;
+import com.sellertl.sellertool_v1_login.model.type.DeletedType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -76,20 +78,31 @@ public class UserAuthService {
     }
 
     public Boolean checkUserLogin(UserLoginDTO userLoginDto, HttpServletRequest request) {
-        UserEntity user = userRepository.findByUsername(userLoginDto.getUsername());
-        if (user == null) {
-            return false;
-        }
-
-        String mergePassword = userLoginDto.getPassword() + user.getSalt();
-        // **Original
-        // if (encoder.matches(mergePassword, user.getPassword())) {
-        //     UserLoginSessionDTO sessionDataSet = setUserEntityToSessionDTO(user);
-        //     redisTemplate.opsForValue().set("spring:session:sessions:expires:" + request.getSession().getId(),sessionDataSet);
-        //     return true;
+        // ** OLD TEST_TODO V1
+        // UserEntity user = userRepository.findByUsername(userLoginDto.getUsername());
+        // if (user == null) {
+        //     return false;
         // }
 
-        // **Test OK **
+        // String mergePassword = userLoginDto.getPassword() + user.getSalt();
+
+        // if (encoder.matches(mergePassword, user.getPassword())) {
+        //     UserLoginSessionDTO sessionDataSet = setUserEntityToSessionDTO(user);
+        //     String dto2String = convert.objectClass2JsonStringConvert(sessionDataSet);
+        //     redisTemplate.opsForValue().set("spring:session:sessions:expires:" + request.getSession().getId(),dto2String);
+        //     return true;
+        // }
+        // return false;
+
+        // ** NEW V1
+        Optional<UserEntity> userOpt = userRepository.findByUsername_Custom(userLoginDto.getUsername(), DeletedType.EXIST);
+        if (userOpt.isEmpty()) {
+            return false;
+        }
+        UserEntity user = userOpt.get();
+
+        String mergePassword = userLoginDto.getPassword() + user.getSalt();
+        
         if (encoder.matches(mergePassword, user.getPassword())) {
             UserLoginSessionDTO sessionDataSet = setUserEntityToSessionDTO(user);
             String dto2String = convert.objectClass2JsonStringConvert(sessionDataSet);
@@ -100,8 +113,17 @@ public class UserAuthService {
     }
 
     public Boolean isUserExist(String username) {
-        UserEntity user = userRepository.findByUsername(username);
-        if (user != null) {
+        // ** OLD TEST_TODO V1
+        // UserEntity user = userRepository.findByUsername(username);
+        // if (user != null) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+
+        // ** NEW V1
+        Optional<UserEntity> userOpt = userRepository.findByUsername_Custom(username,DeletedType.EXIST);
+        if (userOpt.isPresent()) {
             return true;
         } else {
             return false;

@@ -33,7 +33,7 @@ public class FindApiController {
         // System.out.println("hello");
         String result = findService.searchPwByEmail(dto.getEmail());
         
-        System.out.println(result);
+        // System.out.println(result);
         if(result.equals("USER_NON")){
             return "{\"message\":\"user_non\"}";
         }

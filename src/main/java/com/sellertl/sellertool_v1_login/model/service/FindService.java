@@ -9,6 +9,7 @@ import javax.mail.MessagingException;
 
 import com.sellertl.sellertool_v1_login.model.entity.UserEntity;
 import com.sellertl.sellertool_v1_login.model.repository.UserRepository;
+import com.sellertl.sellertool_v1_login.model.type.DeletedType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,10 +34,31 @@ public class FindService {
     PasswordEncoder encoder;
 
     public String searchIdByEmail(String email) {
-        UserEntity user = userRepository.findByEmail(email);
-        if (user == null) {
+        // **OLD TEST_TODO V1
+        // UserEntity user = userRepository.findByEmail(email);
+        // if (user == null) {
+        //     return "USER_NON";
+        // }
+
+        // String formatedUsername = getIdEncodeFormat(user.getUsername());
+
+        // try {
+        //     emailService.sendFindId(email, formatedUsername);
+        // } catch (UnsupportedEncodingException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // } catch (MessagingException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
+        // return "SUCCESS";
+
+        // ** NEW V1
+        Optional<UserEntity> userOpt = userRepository.findByEmail_Custom(email,DeletedType.EXIST);
+        if (userOpt.isEmpty()) {
             return "USER_NON";
         }
+        UserEntity user = userOpt.get();
 
         String formatedUsername = getIdEncodeFormat(user.getUsername());
 
@@ -53,11 +75,41 @@ public class FindService {
     }
 
     public String searchPwByEmail(String email) {
-        UserEntity user = userRepository.findByEmail(email);
-        if (user == null) {
+        // **OLD TEST_TODO V1
+        // UserEntity user = userRepository.findByEmail(email);
+        // if (user == null) {
+        //     return "USER_NON";
+        // }
+
+        // Optional<UserEntity> selectedUser = userRepository.findById(user.getId());
+        // String formatedNewPassword = getNewPassword();
+
+        // selectedUser.ifPresent(u -> {
+        //     String salt = UUID.randomUUID().toString();
+        //     String encPassword = encoder.encode(formatedNewPassword + salt);
+        //     u.setPassword(encPassword);
+        //     u.setSalt(salt);
+        //     userRepository.save(u);
+        // });
+
+        // try {
+        //     emailService.sendFindPw(email, formatedNewPassword);
+        // } catch (UnsupportedEncodingException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // } catch (MessagingException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
+        // return "SUCCESS";
+
+        // ** NEW V1
+        Optional<UserEntity> userOpt = userRepository.findByEmail_Custom(email,DeletedType.EXIST);
+        if (userOpt.isEmpty()) {
             return "USER_NON";
         }
 
+        UserEntity user = userOpt.get();
         Optional<UserEntity> selectedUser = userRepository.findById(user.getId());
         String formatedNewPassword = getNewPassword();
 

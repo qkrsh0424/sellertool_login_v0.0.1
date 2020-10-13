@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
@@ -44,23 +45,22 @@ public class UserEntity {
 
     // @Column(name = "created_at", insertable = false, updatable = false)
     @Column(name = "created_at")
-    @CreationTimestamp
+    // @CreationTimestamp
     private Date createdAt;
 
     @Column(name = "updated_at")
-    @CreationTimestamp
+    // @CreationTimestamp
     private Date updatedAt;
 
     @Column(name = "credential_created_at")
-    @CreationTimestamp
+    // @CreationTimestamp
     private Date credentialCreatedAt;
 
     @Column(name = "credential_expire_at")
-    @CreationTimestamp
+    // @CreationTimestamp
     private Date credentialExpireAt;
 
     @Column(name = "deleted")
-    @GeneratedValue
     private int deleted;
 
 }
