@@ -304,24 +304,6 @@ public class EmailService {
         String title = "셀러툴 비밀번호 찾기 메일 입니다.";
         String sendAddress = "sellertool@sellertl.com";
         StringBuilder content = new StringBuilder();
-        // content.append(
-        //                 "<!DOCTYPE html>"+
-        //                 "<html lang=\"ko\">"+
-        //                 "<head>"+
-        //                     "<meta charset=\"UTF-8\">"+
-        //                     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"+
-        //                 "</head>"+
-        //                 "<body>"+
-        //                     "<div style=\"text-align:center;\">"+
-        //                         "<h1>안녕하세요 셀러툴 입니다. 셀러툴을 이용해 주셔서 감사합니다.</h1>"+
-        //                         "<h1>회원님의 임시 비밀번호는 </h3>"+
-        //                         "<h1 style=\"color:red;\"><strong>"+newPassword+"</strong></h1>"+
-        //                         "<h1>입니다.</h1>"+
-        //                         "<h1>임시 비밀번호로 로그인을 하신다음 빠른 시일내로 새로운 비밀번호로 변경해 주시기 바랍니다.</h1>"+
-        //                     "</div>"+
-        //                 "</body>"+
-        //                 "</html>"
-        //             );        
         content.append(
             "<!DOCTYPE html>"+
             "<html lang=\"ko\">"+
