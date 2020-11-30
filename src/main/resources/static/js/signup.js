@@ -87,6 +87,12 @@ function chkPW(password, checkPassword) {
 
 function valifyEmailSend(){
     // $("#valifyEmailBox").css("display","block");
+    if($("#email").val()=='' | $("#email").val()==null){
+        alert('이메일을 정확히 입력해 주세요.');
+        return;
+    }
+
+    $('#email').attr('disabled',true);
     let data = {
         "email":$("#email").val()
     }
@@ -134,6 +140,7 @@ function emailAuthHtmlView(bool){
             `
         );
     }else{
+        $('#email').attr('disabled',false);
         $("#valifyEmailBtn").attr("disabled",false);
         $("#valifyEmailBox").html('');
     }

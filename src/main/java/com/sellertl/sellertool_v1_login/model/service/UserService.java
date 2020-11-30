@@ -29,7 +29,6 @@ public class UserService {
         //     return getUserSessionDtoToVo(userLoginSessionDTO);
         // }
         // return null;
-
         // **TEST OK**
         if(userAuthService.isUserSessionValid(request)){
             // System.out.println("UserService/getUserInfo : hello");
