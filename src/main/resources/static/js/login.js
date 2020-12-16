@@ -17,7 +17,12 @@ $("#LOGIN").submit(function (event) {
         dataType: 'json',
         data: data,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("X-CSRF-Token", $("#_csrf").val());
+            // CSRF COOKIE SET EXAMPLE
+            // Origin
+            // xhr.setRequestHeader("X-CSRF-Token", $("#_csrf").val());
+
+            // New
+            xhr.setRequestHeader("X-XSRF-TOKEN", $("#_csrf").val());
         },
         success: function (data) {
             if (data.message === "success") {

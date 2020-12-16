@@ -65,7 +65,6 @@ public class UserApiController {
         } else{
             response.sendRedirect(myEnvDevMainUrl);
         }
-        
     }
 
     @GetMapping(value = "/logout")

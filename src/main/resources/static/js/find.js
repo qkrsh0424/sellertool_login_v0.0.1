@@ -45,7 +45,7 @@ $("#FINDPW").submit(function(event){
         timeout:1500,
         data:data,
         beforeSend:function(xhr){
-            xhr.setRequestHeader("X-CSRF-Token", $("#_csrf_FINDPW").val());
+            xhr.setRequestHeader("X-XSRF-TOKEN", $("#_csrf_FINDPW").val());
         },
         success:function(returnData){
             if(returnData.message==="user_non"){
