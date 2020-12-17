@@ -57,6 +57,7 @@ public class UserApiController {
         return "{\"message\":\"failure\"}";
     }
 
+    // TODO LOGOUT AJAX 로 넘기기
     @PostMapping(value = "/logout")
     public void LogoutDo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         userAuthService.logout(request);

@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
@@ -25,6 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Value("${spring.redis.port}")
     private int redisPort;
     
+    @Value("${app.environment}")
+    private String myEnvironment;
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -40,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .loginPage("/login")
             .and()
             .csrf()
-                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                    .csrfTokenRepository(getCookieCsrfTokenRepository());
     }
     
     @Bean
@@ -86,5 +88,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         serializer.setCookiePath("/");
         serializer.setDomainNamePattern("^.+?\\.(\\w+\\.[a-z]+)$");
         return serializer;
+    }
+
+    @Bean
+    public CrossDomainCookieCsrfTokenRepository getCookieCsrfTokenRepository(){
+        CrossDomainCookieCsrfTokenRepository cookieTokenConfig = new CrossDomainCookieCsrfTokenRepository();
+        cookieTokenConfig.setCookieName("XSRF-TOKEN");
+        cookieTokenConfig.setCookiePath("/");
+        cookieTokenConfig.setDomainPattern("^.+?\\.(\\w+\\.[a-z]+)$");
+        return cookieTokenConfig;
     }
 }
