@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- header GET -->
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div class="st-ty-signup-container">
+        <div class="st-ty-signup-wrapper col-md-5">
+            <h2 class="st-ty-signup-logo text-center">Seller Tool</h2>
+            <div class="st-ty-signup-body">
+                <form action="SIGNUP" method="post" id="SIGNUP">
+                    <h4 class="st-ty-signup-intro text-center">셀러툴계정 정보를 입력해주세요</h4>
+                    <input hidden id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <div class="m-2 form-group">
+                        <label for="username">아이디</label>
+                        <input type="text" class="st-ty-singup-input" placeholder="아이디" name="username" id="username" required>
+                        <small id="usernameHelp" class="form-text text-muted">"아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다."</small>
+                    </div>
+                    <div class="m-2 form-group">
+                        <label for="password">비밀번호</label>
+                        <input type="password" class="st-ty-singup-input mb-2" placeholder="비밀번호" name="password" id="password" required>
+                        <input type="password" class="st-ty-singup-input" placeholder="비밀번호 확인" name="password_check" id="password_check" required>
+                        <small id="passwordHelp" class="form-text text-muted">"비밀번호는 8자리 ~ 20자리 이내로 공백없이 영문, 숫자, 특수문자를 혼합하여 입력해주세요."</small>
+
+                    </div>
+                    <div class="m-2 form-group">
+                        <label for="name">닉네임</label>
+                        <input type="text" class="st-ty-singup-input" placeholder="닉네임 또는 사업자명" name="name" id="name" required>
+                    </div>
+                    <div class="m-2 form-group">
+                        <label for="email">이메일</label>
+                        <input type="email" class="st-ty-singup-input" placeholder="이메일" name="email" id="email" required>
+                        <small id="passwordHelp" class="form-text text-muted">"중복 이메일은 허용하지 않으며, 이후 아이디 및 비밀번호 찾기에 이용됩니다."</small>
+                        <button type="button" onclick="valifyEmailSend()" class="btn mt-2 st-ty-signup-email-btn" id="valifyEmailBtn">인증메일 발송</button>
+                    </div>
+                    <div class="m-2" id="valifyEmailBox"></div>
+                    <div class="signup-policy form-group st-ty-signup-policy-box">
+                        <div>
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <label class="form-check-label" for="invalidCheck">
+                            이용약관, 개인정보 수집 및 이용에 전체 동의
+                        </label>
+                        </div>
+                        <div>
+                            <span>[필수] 이용약관 동의 </span><a href="http://www.sellertl.com/policy/privacy.html" target="_blank">보기</a>
+                        </div>
+                        <div>
+                            <span>[필수] 개인정보 수집 및 이용 동의 </span><a href="http://www.sellertl.com/policy/service.html" target="_blank">보기</a>
+                        </div>
+                    </div>
+                    <div class="st-ty-signup-submit clearfix">
+                        <button type="submit" class="btn btn-lg st-ty-login-btn" id="signupSubmitBtn" disabled>가입완료</button>
+                    </div>
+                </form>
+                <div class="text-center m-2">
+                    이미 회원이십니까? <a href="/login">로그인</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- footer GET -->
+    <footer th:replace="fragment/footer::footer"></footer>
+
+    <!-- others -->
+    <script th:src="@{/js/signup_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+</body>
+
+</html>

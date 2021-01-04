@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- header GET -->
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div class="st-ty-login-container">
+        <div class="st-ty-login-wrapper col-md-5">
+            <h2 class="st-ty-login-logo text-center">Seller Tool</h2>
+            <div class="st-ty-login-body">
+                <form action="LOGIN" method="post" id="LOGIN" class="clearfix">
+                    <input hidden id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <div class="my-3">
+                        <input type="text" class="st-ty-login-input" placeholder="아이디" name="username" id="username" required>
+                    </div>
+                    <div class="my-3">
+                        <input type="password" class="st-ty-login-input" placeholder="비밀번호" name="password" id="password" required>
+                    </div>
+                    <div class=" clearfix">
+                        <button type="submit" class="btn btn-lg st-ty-login-btn">로그인</button>
+                    </div>
+                </form>
+                <div class="my-3 st-ty-login-find-text">
+                    <a href="/find/id">아이디 찾기</a> | <a href="/find/pw">비밀번호 찾기</a>
+                </div>
+                <div class="st-ty-login-signup-box ">
+                    <div class="font-weight-bold">아직 계정이 없으신가요?</div>
+                    <a href="/signup"><u>30초만에 가입</u></a>하셔서, 더 많은 도구를 활용해보세요.
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- footer GET -->
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script th:src="@{/js/login.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+.st-ty-login-wrapper {
+    margin: auto;
+    padding-top: 120px;
+}
+
+.st-ty-login-logo {
+    font-size: 36px;
+    background: linear-gradient(to right, #002c40, #164773, #1d5a8d, #f2a057, #f2c6a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.st-ty-login-body {
+    margin-top: 0;
+    margin-left: 0;
+    padding: 34px 80px;
+    background: #fff;
+    border-radius: 4px;
+    font-family: NotoSans-Regular, AppleSDGothicNeo-Regular, "맑은 고딕", Malgun Gothic, "돋움", dotum, sans-serif;
+}
+
+@media (max-width: 800px) {
+    .st-ty-login-body {
+        padding: 0px;
+    }
+}
+
+.st-ty-login-logo {
+    margin-bottom: 30px;
+}
+
+.st-ty-login-input {
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    padding: 12px 16px 12px 12px;
+}
+
+.st-ty-login-btn {
+    width: 100%;
+    background-color: #164773;
+    color: white;
+}
+
+.st-ty-login-find-text,
+.st-ty-login-find-text a {
+    text-decoration: none;
+    color: #002c40;
+}
+
+.st-ty-login-signup-box {
+    background-color: #ecf0f1;
+    padding: 24px;
+    border-radius: 4px;
+}

@@ -1,0 +1,66 @@
+.st-ty-signup-container label:not(:last-child) {
+    margin-top: 40px;
+}
+
+.st-ty-signup-wrapper {
+    margin: auto;
+}
+
+.st-ty-signup-logo {
+    font-size: 36px;
+    padding: 60px 0px 40px 0px;
+    background: linear-gradient(to right, #002c40, #164773, #1d5a8d, #f2a057, #f2c6a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.st-ty-signup-intro {
+    margin: 2px;
+    margin-top: 40px;
+    font-size: 28px;
+}
+
+.st-ty-signup-body {
+    margin-top: 0;
+    margin-left: 0;
+    padding: 34px 80px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #e1e1e1;
+    font-family: NotoSans-Regular, AppleSDGothicNeo-Regular, "맑은 고딕", Malgun Gothic, "돋움", dotum, sans-serif;
+}
+
+@media (max-width: 800px) {
+    .st-ty-signup-intro {
+        font-size: 22px;
+    }
+    .st-ty-signup-body {
+        padding: 14px 30px;
+    }
+}
+
+.st-ty-singup-input {
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    padding: 12px 16px 12px 12px;
+}
+
+.st-ty-signup-email-btn {
+    border: 1px solid #e1e1e1;
+    float: right;
+    border-radius: 30px;
+    letter-spacing: -0.03em;
+}
+
+.st-ty-signup-policy-box {
+    margin: 2px;
+    margin-top: 60px;
+}
+
+.st-ty-signup-check-email {
+    margin-top: 70px;
+}
+
+.st-ty-signup-submit {
+    margin: 40px 0;
+}

@@ -53,7 +53,7 @@ public class RouterController {
         if(userAuthService.isUserSessionValid(request)){
             return "redirect:/";
         }
-        return "view/login";
+        return "view/login_ty";
     }
 
     @GetMapping(value = "/signup")
@@ -61,7 +61,7 @@ public class RouterController {
         if(userAuthService.isUserSessionValid(request)){
             return "redirect:/";
         }
-        return "view/signup";
+        return "view/signup_ty";
     }
 
     @GetMapping(value = "/find/id")
